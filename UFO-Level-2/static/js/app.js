@@ -45,8 +45,12 @@ button.on("click", () => {
     var inputDate = inputFieldDate.property("value").trim();
     var inputCity = inputFieldCity.property("value").toLowerCase().trim();
 
+    // Either Or Filtering
     var filterDate = tableData.filter(tableData => tableData.datetime === inputDate);
     var filterCity = tableData.filter(tableData => tableData.city === inputCity);
+    
+    // Combined filter of data
+    var filterCombinedData = tableData.filter(tableData => tableData.datetime === inputDate && tableData.city === inputCity);
 
     $tbody.html("");
 
