@@ -48,17 +48,17 @@ button.on("click", () => {
     // Either Or Filtering
     var filterDate = tableData.filter(tableData => tableData.datetime === inputDate);
     var filterCity = tableData.filter(tableData => tableData.city === inputCity);
-    
+
     // Combined filter of data
     var filterCombinedData = tableData.filter(tableData => tableData.datetime === inputDate && tableData.city === inputCity);
 
     $tbody.html("");
 
     let response = {
-        filterDate
+        filterDate, filterCity, filterCombinedData
     }
 
-    if(response.filterDate.length !== 0) {
+    if(response.filterCombinedData.length !== 0) {
         addData(filterDate);
     }
         else {
