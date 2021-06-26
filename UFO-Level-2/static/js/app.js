@@ -40,7 +40,6 @@ function buildTable(tableData) {
 }
 
 // Identify user input and use the selected criteria to apply a filter to the data
-
 function applycriteria() {
 
   // Prevent browser from executing default action 
@@ -59,27 +58,22 @@ function applycriteria() {
   if (date) {
     filteredData = filteredData.filter(row => row.datetime === date);
   }
-
   // If user wants specific city, apply it to the filter
   if (city) {
     filteredData = filteredData.filter(row => row.city === city);
   }
-
   // If specific state is selected, apply it to the filter
   if (state) {
     filteredData = filteredData.filter(row => row.state === state);
   }
-
   // If specific country is selected, apply ti to the filter
   if (country) {
     filteredData = filteredData.filter(row => row.country === country);
   }
-
   // If specific shape is selected, apply to filter
   if (shape) {
     filteredData = filteredData.filter(row => row.shape === shape);
   }
-
  // Build final table
   buildTable(filteredData);
 }
