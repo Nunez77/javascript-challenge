@@ -35,7 +35,6 @@ var addData = (dataInput) => {
         )
     });
 }
-
 addData(tableData);
 
 // Setting up the Filter Button for Date
@@ -44,9 +43,11 @@ button.on("click", () => {
     d3.event.preventDefault();
 
     var inputDate = inputFieldDate.property("value").trim();
+    var inputCity = inputFieldCity.property("value").toLowerCase().trim();
 
     var filterDate = tableData.filter(tableData => tableData.datetime === inputDate);
-
+    var filterCity = tableData.filter(tableData => tableData.city === inputCity);
+    
     $tbody.html("");
 
     let response = {
