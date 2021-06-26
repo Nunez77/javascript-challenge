@@ -59,9 +59,8 @@ button.on("click", () => {
     }
 
     if(response.filterCombinedData.length !== 0) {
-        addData(filterDate);
+        addData(filterCombinedData);
     }
-        else {
-            $tbody.append("tr").append("td").text("No sightings reported at the given date.");
-        }
+        else if(response.filterCombinedData.length === 0 && ((response.filterDate.length !== 0 || response.filterCity.length !== 0))) {
+            addData(filterDate) || addData(filterCity);
 })
