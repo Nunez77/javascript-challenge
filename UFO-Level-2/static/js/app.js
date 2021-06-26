@@ -17,68 +17,80 @@ var tableData = data;
 // YOUR CODE HERE!
 
 // Create references
+// Body
+var $tbody = d3.select("tbody");
 // Button
 var button = d3.select("#filter-btn");
-// Form Date & City
+// Form
+var form = d3.select("#form");
+// Select original list with filters
+var filters = d3.select("#filters");
+// All variables
 var inputFieldDate = d3.select("#datetime");
 var inputFieldCity = d3.select("#city");
 var inputFieldState = d3.select("#state");
 var inputFieldCountry = d3.select("#country");
-var inputFieldShape = d3.select("shape");
-// Body
-var $tbody = d3.select("tbody");
-$tbody.html("");
+var inputFieldShape = d3.select("#shape");
+
 // Columns
 var columns = ["datetime", "city", "state", "country", "shape", "durationMinutes", "comments"]
 
-// Displaying search results
-var addData = (dataInput) => {
-    dataInput.forEach(ufoSightings => {
-        var row = $tbody.append("tr");
-        columns.forEach(column => row.append("td").text(ufoSightings[column])
-        )
-    });
+// Create function
+function criteriaTable(table, data) {
+    tableHtml= d3.select("tbody")
+    tableHtml.html("")
+    // For each column in the data set
+    for (let element of data) {
+      // Insert row each time criteria is met
+      let row = table.insertRow();
+      // For each row in each column
+      for (key in element) {
+        // Insert new cell in each column each time criteria is met
+        let cell = row.insertCell();
+        // Creates text node. A text node encapsulates XML character content.
+        let text = document.createTextNode(element[key]);
+        // Appends row in column that met criteria to the new text node
+        cell.appendChild(text);
+      }
+    }
+  };
+  // grab table and pass that to our function
+  let table = document.querySelector("tbody");
+  criteriaTable(table, tableData);
+ // --------------------------------------------
+
+ //filter the table function
+function filterData(userInput){
+    input=d3.select(userInput);
+    inputValue=input.property("value");  
+  return inputValue
 }
-addData(tableData);
 
-// Setting up the Filter Button for Date
-button.on("click", () => {
+// select the button(event)
+filterButton=d3.select("#filter-btn");
 
-    d3.event.preventDefault();
-
-    var inputDate = inputFieldDate.property("value").trim();
-    var inputCity = inputFieldCity.property("value").toLowerCase().trim();
-
-    // Either Or Filtering
-    var filterDate = tableData.filter(tableData => tableData.datetime === inputDate);
-    var filterCity = tableData.filter(tableData => tableData.city === inputCity);
-    var filterState = tableData.filter(tableData => tableData.state === inputState);
-    var filterCountry = tableData.filter(tableData => tableData.country === inputCountry);
-    var filterShape = tableData.filter(tableData => tableData.shape === inputShape);
-
-    // Combined filter of data
-    var filterResults = tableData.filter(ufoSighting =>
-        (ufoSighting.datetime === datetimeInput || !datetimeInput) &&
-        (ufoSighting.city === cityInput || !cityInput) && 
-        (ufoSighting.state === stateInput || !stateInput) &&
-        (ufoSighting.country === countryInput || !countryInput) &&
-        (ufoSighting.shape === shapeInput || !shapeInput)
-        );
+// call `on` (event lessener) to run the function that will work 
+filterButton.on("click",() => {
+   // filter the input from the table
+    filterTable=tableData.filter(item => (item.datetime === filterData("#datetime") || filterData("#datetime") === "") 
+    && (item.city === filterData("#city") || filterData("#city") === "")
+    && (item.state === filterData("#state") || filterData("#state") === "")
+    && (item.country === filterData("#country") || filterData("#country") === "") 
+    && (item.shape === filterData("#shape") || filterData("#shape") === ""));
+    console.log("filterTable",filterTable);
+    criteriaTable(table,filterTable);
 
 
+});
 
-    let response = {
-        filterDate, filterCity, filterCombinedData
-    }
-
-    if(response.filterCombinedData.length !== 0) {
-        addData(filterCombinedData);
-    }
-        else if(response.filterCombinedData.length === 0 && ((response.filterDate.length !== 0 || response.filterCity.length !== 0))) {
-            addData(filterDate) || addData(filterCity);
-        }
-        else {
-                $tbody.append("tr").append("td").text("The selected criteria does not meet registered findings.");
-        }
-
-})
+// reset the table from the begnning button 
+resetButton=d3.select("#reset-btn")
+resetButton.on("click",() => {
+    criteriaTable(table,tableData)
+    // clear the input fileds 
+    document.getElementById('datetime').value = ''
+    document.getElementById('city').value = ''
+    document.getElementById('state').value = ''
+    document.getElementById('country').value = ''
+    document.getElementById('shape').value = ''
+});
