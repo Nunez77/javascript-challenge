@@ -88,4 +88,10 @@ function applycriteria() {
 d3.selectAll("#filter-btn").on("click", applycriteria);
 
 // Pending
-buildTable(tableData);
+// buildTable(tableData);
+
+filterResults.forEach((filteredData) => {
+    console.log(filteredData);
+    row = tbody.append("tr");
+    Object.values(filteredData).forEach(value => row.append("td").text(value));
+    })
