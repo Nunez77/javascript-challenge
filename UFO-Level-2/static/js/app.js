@@ -23,9 +23,9 @@ var $tbody = d3.select("tbody");
 var button = d3.select("#filter-btn");
 // Form
 var form = d3.select("#form");
-// Select original list with filters
+// Original list
 var filters = d3.select("#filters");
-// All variables
+// Available variables for users
 var inputFieldDate = d3.select("#datetime");
 var inputFieldCity = d3.select("#city");
 var inputFieldState = d3.select("#state");
@@ -54,12 +54,12 @@ function criteriaTable(table, data) {
       }
     }
   };
-  // grab table and pass that to our function
+  // Assign original table to variable
   let table = document.querySelector("tbody");
   criteriaTable(table, tableData);
  // --------------------------------------------
 
- //filter the table function
+ // Apply user selections
 function filterData(userInput){
     input=d3.select(userInput);
     inputValue=input.property("value");  
