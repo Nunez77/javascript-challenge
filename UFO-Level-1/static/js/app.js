@@ -34,3 +34,33 @@ var addData = (dataInput) => {
 
 addData(tableData);
 
+/ Creating an Event Listener for the Button
+// Setting up the Filter Button for Date and City
+button.on("click", () => {
+
+    d3.event.preventDefault();
+    
+
+    var inputDate = inputFieldDate.property("value").trim();
+    
+
+    var filterDate = tableData.filter(tableData => tableData.datetime === inputDate);
+    
+
+    $tbody.html("");
+
+    let response = {
+        filterDate
+    }
+
+
+    if(response.filterDate.length !== 0) {
+        addData(filterDate);
+    }
+
+    // Top if only works for filtering the date
+    
+        else {
+            $tbody.append("tr").append("td").text("No Sightings Here...Move On...");
+        }
+})
