@@ -27,6 +27,7 @@ var inputFieldCountry = d3.select("#country");
 var inputFieldShape = d3.select("shape");
 // Body
 var $tbody = d3.select("tbody");
+$tbody.html("");
 // Columns
 var columns = ["datetime", "city", "state", "country", "shape", "durationMinutes", "comments"]
 
@@ -56,10 +57,15 @@ button.on("click", () => {
     var filterShape = tableData.filter(tableData => tableData.shape === inputShape);
 
     // Combined filter of data
-    var filterCombinedData = tableData.filter(tableData => tableData.datetime === inputDate && tableData.city === inputCity 
-        && tableData.state === inputState && tableData.country === inputCountry && tableData.shape === inputShape);
+    var filterResults = tableData.filter(ufoSighting =>
+        (ufoSighting.datetime === datetimeInput || !datetimeInput) &&
+        (ufoSighting.city === cityInput || !cityInput) && 
+        (ufoSighting.state === stateInput || !stateInput) &&
+        (ufoSighting.country === countryInput || !countryInput) &&
+        (ufoSighting.shape === shapeInput || !shapeInput)
+        );
 
-    $tbody.html("");
+
 
     let response = {
         filterDate, filterCity, filterCombinedData
