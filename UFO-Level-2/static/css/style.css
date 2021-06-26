@@ -54,7 +54,7 @@ body {
 
 /* Adding styles to the aside and filter form */
 .ufo-form {
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
 .filters .panel-body {
@@ -62,13 +62,13 @@ body {
 }
 
 .filters {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 select {
   display: block;
-  width: 100%;
-  padding: 8px;
+  width: 150%;
+  padding: 15px;
   color: #8e979f;
   outline: none;
 }
