@@ -87,6 +87,5 @@ function applycriteria() {
 // When button is clicked, display table according to selections
 d3.selectAll("#filter-btn").on("click", applycriteria);
 
-
 // Pending
 buildTable(tableData);
