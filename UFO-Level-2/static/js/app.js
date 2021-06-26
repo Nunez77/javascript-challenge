@@ -22,6 +22,9 @@ var button = d3.select("#filter-btn");
 // Form Date & City
 var inputFieldDate = d3.select("#datetime");
 var inputFieldCity = d3.select("#city");
+var inputFieldState = d3.select("#state");
+var inputFieldCountry = d3.select("#country");
+var inputFieldShape = d3.select("shape");
 // Body
 var $tbody = d3.select("tbody");
 // Columns
@@ -63,4 +66,9 @@ button.on("click", () => {
     }
         else if(response.filterCombinedData.length === 0 && ((response.filterDate.length !== 0 || response.filterCity.length !== 0))) {
             addData(filterDate) || addData(filterCity);
+        }
+        else {
+                $tbody.append("tr").append("td").text("The selected criteria does not meet registered findings.");
+        }
+
 })
