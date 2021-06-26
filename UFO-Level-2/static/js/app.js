@@ -19,7 +19,7 @@ var tableData = data;
 // Create references
 // Button
 var button = d3.select("#filter-btn");
-// Form Date / City
+// Form Date & City
 var inputFieldDate = d3.select("#datetime");
 var inputFieldCity = d3.select("#city");
 // Body
@@ -47,7 +47,7 @@ button.on("click", () => {
 
     var filterDate = tableData.filter(tableData => tableData.datetime === inputDate);
     var filterCity = tableData.filter(tableData => tableData.city === inputCity);
-    
+
     $tbody.html("");
 
     let response = {
