@@ -51,9 +51,13 @@ button.on("click", () => {
     // Either Or Filtering
     var filterDate = tableData.filter(tableData => tableData.datetime === inputDate);
     var filterCity = tableData.filter(tableData => tableData.city === inputCity);
+    var filterState = tableData.filter(tableData => tableData.state === inputState);
+    var filterCountry = tableData.filter(tableData => tableData.country === inputCountry);
+    var filterShape = tableData.filter(tableData => tableData.shape === inputShape);
 
     // Combined filter of data
-    var filterCombinedData = tableData.filter(tableData => tableData.datetime === inputDate && tableData.city === inputCity);
+    var filterCombinedData = tableData.filter(tableData => tableData.datetime === inputDate && tableData.city === inputCity 
+        && tableData.state === inputState && tableData.country === inputCountry && tableData.shape === inputShape);
 
     $tbody.html("");
 
